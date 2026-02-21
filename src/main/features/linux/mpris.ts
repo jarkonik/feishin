@@ -152,9 +152,9 @@ ipcMain.on(
 
             mprisPlayer.metadata = {
                 'mpris:artUrl': imageUrl || null,
-                'mpris:length': song.duration ? Math.round((song.duration || 0) * 1e3) : null,
+                'mpris:length': song.duration ? Math.round((song.duration || 0) * 1e3) : null, // TODO: Maybe wrong, deleted the entire run previously
                 'mpris:trackid': song.id
-                    ? mprisPlayer.objectPath(`track/${song.id?.replace('-', '')}`)
+                    ? mprisPlayer.objectPath(`track/${song.id?.replace(/[^A-Za-z0-9_]/g, '_')}`)
                     : '',
                 'xesam:album': song.album || null,
                 'xesam:albumArtist': song.albumArtists?.length
